@@ -8,8 +8,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace AspNetCoreExample
@@ -30,15 +33,13 @@ namespace AspNetCoreExample
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public virtual void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,7 +59,8 @@ namespace AspNetCoreExample
 
             });
 
-            app.UseMvc();
+            app.UseRouting();  
+            app.UseEndpoints(e => e.MapControllers());
         }
     }
 }
