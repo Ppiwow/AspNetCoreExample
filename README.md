@@ -16,7 +16,7 @@ It's enough for you to run `./scripts/runAcceptanceTests.sh` to
 
 ## Pre-requisites
 
-* Installed .NET Core SDK 2.1
+* Installed .NET Core SDK 3.1
 	* https://www.microsoft.com/net/download
 
 ## Build Application
@@ -34,16 +34,16 @@ From command line execute `dotnet run`
 
 ## Docker run - Production environment
 
-`docker run -p 80:80 <name of container>`
+`docker run -p 5000:80 <name of container>`
 
 ## Docker run - ContractTests environment
 
-`docker run -e "ASPNETCORE_ENVIRONMENT=ContractTests" -p 80:80 <name of container>`
+`docker run -e "ASPNETCORE_ENVIRONMENT=ContractTests" -p 5000:80 <name of container>`
 
 # Swagger
 
-http://localhost/swagger - swagger ui
-http://localhost/api-docs - redoc
+http://localhost:5000/swagger - swagger ui
+http://localhost:5000/api-docs - redoc
 
 
 # Pipelines
