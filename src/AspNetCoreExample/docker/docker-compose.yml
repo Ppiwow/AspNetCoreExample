@@ -5,4 +5,4 @@ services:
       context: .
       dockerfile: Dockerfile-artifactory
     ports:
-      - "8081:8081"
+      - "8010:8081"
